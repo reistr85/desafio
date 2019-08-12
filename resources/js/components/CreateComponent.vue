@@ -86,11 +86,15 @@
                 axios.post(url, user).then(response => {
                     this.success = true;
                     this.error = false;
-                    console.log(response.data);
                 }).catch(error => {
                     this.error = true;
                     this.success = false;
-                    console.log(error);
+                }).finally(()=>{
+                    this.id = "";
+                    this.name = "";
+                    this.email = "";
+                    this.phone = "";
+                    this.password = "";
                 });
             }
         }

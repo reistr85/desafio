@@ -27,6 +27,10 @@
                                         <td>{{ user.email }}</td>
                                         <td>{{ user.phone }}</td>
                                     </tr>
+
+                                    <tr v-if="user">
+                                        <td colspan="4"><button class="btn btn-danger btn-sm pull-right" v-on:click="destroy(user.id)"><i class="fa fa-trash"></i> Excluir</button></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -60,6 +64,17 @@
             return {
                 user: [],
                 loader: true
+            }
+        },
+        methods: {
+            destroy: function(id){
+                if(confirm("Deseja realmente exlcuir este usuário?")){
+                    let url = 'http://desafio.test/api/users/'+id;
+                    axios.delete(url).then((response) => {
+                        alert('Excluido com sucesso!');
+                        this.$router.push('/users');
+                    });
+                }
             }
         }
     }

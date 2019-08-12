@@ -6,7 +6,7 @@
                     <div class="card-header">Início</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        <p align="center"><img src="/images/logo.png" alt="Desafio ESIG" /></p>
                     </div>
                 </div>
             </div>

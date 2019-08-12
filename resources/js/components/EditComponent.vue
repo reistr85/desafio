@@ -18,34 +18,38 @@
                         </div>
 
                         <form @submit.prevent="update">
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <label for="id">ID:</label>
-                                    <input type="text" id="id" class="form-control" v-model="id" readonly />
-                                </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="bg-dark text-white">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nome</th>
+                                            <th scope="col">E-mail</th>
+                                            <th scope="col">Contato</th>
+                                        </tr>
+                                    </thead>
 
-                                <div class="col-md-4">
-                                    <label for="name">Nome:</label>
-                                    <input type="text" id="name" name="name" v-model="name" class="form-control" />
-                                </div>
+                                    <tbody v-if="loader == false">
+                                        <tr>
+                                            <td><input type="text" id="id" class="form-control" v-model="id" readonly /></td>
+                                            <td><input type="text" id="name" name="name" v-model="name" class="form-control" /></td>
+                                            <td><input type="text" id="email" name="email" v-model="email" class="form-control" /></td>
+                                            <td><input type="text" id="phone" v-model="phone" class="form-control" /></td>
+                                        </tr>
 
-                                <div class="col-md-4">
-                                    <label for="email">E-mail:</label>
-                                    <input type="text" id="email" name="email" v-model="email" class="form-control" />
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label for="phone">Phone:</label>
-                                    <input type="text" id="phone" v-model="phone" class="form-control" />
-                                </div>
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col-md-12">
-                                    <button class="btn btn-success btn-sm pull-right"><i class="fa fa-check"></i> Confirmar</button>
-                                </div>
+                                        <tr>
+                                            <td colspan="4"><button class="btn btn-success btn-sm pull-right"><i class="fa fa-check"></i> Confirmar</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </form>
+
+                        <div v-if="loader" class="d-flex justify-content-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,6 +72,10 @@
                 this.name = response.data.name;
                 this.email = response.data.email;
                 this.phone = response.data.phone;
+            }).catch(error => {
+
+            }).finally(()=>{
+                this.loader = false;
             });
 
             return {
@@ -76,7 +84,8 @@
                 email: this.email,
                 phone: this.phone,
                 error: false,
-                success: false
+                success: false,
+                loader: true
             }
         },
         methods:{
@@ -96,7 +105,7 @@
                 }).catch(error => {
                     this.error = true;
                     this.success = false;
-                });
+                })
             }
         }
     }

@@ -37,6 +37,12 @@
                             </table>
                         </div>
 
+                        <div v-if="loader" class="d-flex justify-content-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -49,12 +55,18 @@
         data: function () {
             //let url = 'https://jsonplaceholder.typicode.com/users';
             let url = 'http://desafio.test/api/users';
+
             axios.get(url).then((response) => {
                 this.users = response.data;
+            }).catch(error => {
+
+            }).finally(()=>{
+                this.loader = false;
             });
 
             return {
-                users: []
+                users: [],
+                loader: true
             }
         }
     }
