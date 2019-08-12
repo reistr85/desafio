@@ -1,5 +1,5 @@
 ![CSCore Logo](http://mgetech.com.br/projetos/desafio/logo.png)
-Este README tem por objetivo passar todas as orientação para colocar o projeto em funcionamento.
+* Este README tem por objetivo passar todas as orientação para colocar o projeto em funcionamento.
 
 ### O PROJETO ###
 
