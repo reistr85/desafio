@@ -37,8 +37,8 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <label for="phone">Celular:</label>
-                                    <input type="text" id="phone" v-model="phone" class="form-control" />
+                                    <label for="phone">Telefone:</label>
+                                    <input type="text" id="phone" v-model="phone" v-mask="['(##)####-####', '(##)#####-####']" class="form-control" />
                                     <code v-if="msgErrors.phone">Celular obrigatório</code>
                                 </div>
 
@@ -73,7 +73,12 @@
 </template>
 
 <script>
+    import {mask} from 'vue-the-mask';
+
     export default {
+        directives: {
+            mask
+        },
         data: function () {
             return {
                 id: "",
@@ -87,6 +92,7 @@
                 loader: false
             }
         },
+
         methods:{
             update: function(event){
                 this.loader = true;

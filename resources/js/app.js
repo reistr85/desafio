@@ -5,8 +5,9 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import VueTheMask from 'vue-the-mask';
 
-Vue.use(VueRouter, VueAxios, axios)
+Vue.use(VueRouter, VueAxios, axios, VueTheMask)
 
 let routes = [
     { path: '/', name: 'home', component: require('./components/HomeComponent.vue').default },
@@ -27,5 +28,5 @@ Vue.component('nav-component', require('./components/NavComponent.vue').default)
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
 });
