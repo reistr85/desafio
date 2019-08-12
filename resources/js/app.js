@@ -23,6 +23,7 @@ const router = new VueRouter({
 })
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('nav-component', require('./components/NavComponent.vue').default);
 
 const app = new Vue({
     el: '#app',

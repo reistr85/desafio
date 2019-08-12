@@ -6,7 +6,7 @@
                     <div class="card-header">Início</div>
 
                     <div class="card-body">
-                        <p align="center"><img src="/images/logo.png" alt="Desafio ESIG" /></p>
+                        <p align="center"><img src="/images/logo.png" alt="Desafio ESIG" class="img-fluid" /></p>
                     </div>
                 </div>
             </div>

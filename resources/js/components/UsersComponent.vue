@@ -53,7 +53,6 @@
 <script>
     export default {
         data: function () {
-            //let url = 'https://jsonplaceholder.typicode.com/users';
             let url = 'http://desafio.test/api/users';
 
             axios.get(url).then((response) => {
