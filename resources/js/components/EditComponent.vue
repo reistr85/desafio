@@ -60,7 +60,8 @@
 <script>
     export default {
         data: function () {
-            let url = 'http://desafio.test/api/users/'+this.$route.params.id+"/edit";
+            //let url = 'http://desafio.test/api/users/'+this.$route.params.id+"/edit";
+            let url = 'https://aw-desafio.herokuapp.com/users/'+this.$route.params.id+"/edit";
 
             axios.get(url).then((response) => {
                 this.id = response.data.id;
@@ -88,7 +89,8 @@
                 this.success = false;
                 this.loader = true;
 
-                let url = 'http://desafio.test/api/users/'+this.$route.params.id;
+                //let url = 'http://desafio.test/api/users/'+this.$route.params.id;
+                let url = 'https://aw-desafio.herokuapp.com/users/'+this.$route.params.id;
                 let user = {
                     id: this.id,
                     name: this.name,

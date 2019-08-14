@@ -53,7 +53,8 @@
 <script>
     export default {
         data: function () {
-            let url = 'http://desafio.test/api/users';
+            //let url = 'http://desafio.test/api/users';
+            let url = 'https://aw-desafio.herokuapp.com/users';
 
             axios.get(url).then((response) => {
                 this.users = response.data;
