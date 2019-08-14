@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+
+    protected $user;
+
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +23,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return User::all();
+        return $this->user->all();
     }
 
     /**
@@ -46,7 +54,7 @@ class UsersController extends Controller
             'password' => bcrypt($formData['password']),
         ];
 
-        return response()->json(User::create($user), 200);
+        return response()->json($this->user->create($user), 200);
     }
 
     /**
@@ -57,7 +65,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        return User::find($id);
+        return $this->user->find($id);
     }
 
     /**
@@ -68,7 +76,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        return User::find($id);
+        return $this->user->find($id);
     }
 
     /**
@@ -80,7 +88,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return response()->json(User::find($id)->update($request->all()), 200);
+        return response()->json($this->user->find($id)->update($request->all()), 200);
     }
 
     /**
@@ -91,6 +99,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        return response()->json(User::destroy($id), 200);
+        return response()->json($this->user->destroy($id), 200);
     }
 }

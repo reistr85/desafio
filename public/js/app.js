@@ -1914,6 +1914,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   directives: {
@@ -1933,7 +1974,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    update: function update(event) {
+    store: function store(event) {
       var _this = this;
 
       this.loader = true;
@@ -2138,10 +2179,6 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     var url = 'http://desafio.test/api/users/' + this.$route.params.id + "/edit";
-    var id = "";
-    var name = "";
-    var email = "";
-    var phone = "";
     axios.get(url).then(function (response) {
       _this.id = response.data.id;
       _this.name = response.data.name;
@@ -2164,6 +2201,8 @@ __webpack_require__.r(__webpack_exports__);
     update: function update(event) {
       var _this2 = this;
 
+      this.success = false;
+      this.loader = true;
       var url = 'http://desafio.test/api/users/' + this.$route.params.id;
       var user = {
         id: this.id,
@@ -2178,6 +2217,8 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         _this2.error = true;
         _this2.success = false;
+      })["finally"](function () {
+        _this2.loader = false;
       });
     }
   }
@@ -37795,188 +37836,167 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.update($event)
+                      return _vm.store($event)
                     }
                   }
                 },
                 [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-1" }, [
-                      _c("label", { attrs: { for: "id" } }, [_vm._v("ID:")]),
+                  _c("div", { staticClass: "table-responsive" }, [
+                    _c("table", { staticClass: "table" }, [
+                      _vm._m(0),
                       _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.id,
-                            expression: "id"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "id", readonly: "" },
-                        domProps: { value: _vm.id },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.id = $event.target.value
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-3" }, [
-                      _c("label", { attrs: { for: "name" } }, [
-                        _vm._v("Nome:")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.name,
-                            expression: "name"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "name", name: "name" },
-                        domProps: { value: _vm.name },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.name = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.msgErrors.name
-                        ? _c("code", [_vm._v("Nome obrigatório")])
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-3" }, [
-                      _c("label", { attrs: { for: "email" } }, [
-                        _vm._v("E-mail:")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.email,
-                            expression: "email"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "email", name: "email" },
-                        domProps: { value: _vm.email },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.email = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.msgErrors.email
-                        ? _c("code", [_vm._v("E-mail obrigatório")])
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-3" }, [
-                      _c("label", { attrs: { for: "phone" } }, [
-                        _vm._v("Telefone:")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.phone,
-                            expression: "phone"
-                          },
-                          {
-                            name: "mask",
-                            rawName: "v-mask",
-                            value: ["(##)####-####", "(##)#####-####"],
-                            expression: "['(##)####-####', '(##)#####-####']"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "phone" },
-                        domProps: { value: _vm.phone },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.phone = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.msgErrors.phone
-                        ? _c("code", [_vm._v("Celular obrigatório")])
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-2" }, [
-                      _c("label", { attrs: { for: "password" } }, [
-                        _vm._v("Senha:")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.password,
-                            expression: "password"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "password", id: "password" },
-                        domProps: { value: _vm.password },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.password = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.msgErrors.password
-                        ? _c("code", [_vm._v("Senha obrigatório")])
-                        : _vm._e()
+                      _c("tbody", [
+                        _c("tr", [
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.name,
+                                  expression: "name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "name",
+                                name: "name",
+                                placeholder: "digite o seu nome"
+                              },
+                              domProps: { value: _vm.name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.name = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.msgErrors.name
+                              ? _c("code", [_vm._v("Nome obrigatório")])
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.email,
+                                  expression: "email"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "email",
+                                name: "email",
+                                placeholder: "digite o seu e-mail"
+                              },
+                              domProps: { value: _vm.email },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.email = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.msgErrors.email
+                              ? _c("code", [_vm._v("E-mail obrigatório")])
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.phone,
+                                  expression: "phone"
+                                },
+                                {
+                                  name: "mask",
+                                  rawName: "v-mask",
+                                  value: ["(##)####-####", "(##)#####-####"],
+                                  expression:
+                                    "['(##)####-####', '(##)#####-####']"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                id: "phone",
+                                placeholder: "digite o seu telefone"
+                              },
+                              domProps: { value: _vm.phone },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.phone = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.msgErrors.phone
+                              ? _c("code", [_vm._v("Celular obrigatório")])
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.password,
+                                  expression: "password"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "password",
+                                id: "password",
+                                placeholder: "digite a sua senha"
+                              },
+                              domProps: { value: _vm.password },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.password = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.msgErrors.password
+                              ? _c("code", [_vm._v("Senha obrigatório")])
+                              : _vm._e()
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(1)
+                      ])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row mt-3" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _vm.loader
-                        ? _c(
-                            "div",
-                            { staticClass: "d-flex justify-content-center" },
-                            [_vm._m(0)]
-                          )
-                        : _vm._e()
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1)
+                  ])
                 ]
-              )
+              ),
+              _vm._v(" "),
+              _vm.loader
+                ? _c("div", { staticClass: "d-flex justify-content-center" }, [
+                    _vm._m(2)
+                  ])
+                : _vm._e()
             ],
             1
           )
@@ -37990,24 +38010,40 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "spinner-border text-primary", attrs: { role: "status" } },
-      [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
-    )
+    return _c("thead", { staticClass: "bg-dark text-white" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nome")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("E-mail")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Contato")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Senha")])
+      ])
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mt-3" }, [
-      _c("div", { staticClass: "col-md-12" }, [
+    return _c("tr", [
+      _c("td", { attrs: { colspan: "4" } }, [
         _c("button", { staticClass: "btn btn-success btn-sm pull-right" }, [
           _c("i", { staticClass: "fa fa-check" }),
           _vm._v(" Confirmar")
         ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "spinner-border text-primary", attrs: { role: "status" } },
+      [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
+    )
   }
 ]
 render._withStripped = true

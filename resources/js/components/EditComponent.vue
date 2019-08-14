@@ -62,11 +62,6 @@
         data: function () {
             let url = 'http://desafio.test/api/users/'+this.$route.params.id+"/edit";
 
-            let id = "";
-            let name = "";
-            let email = "";
-            let phone = "";
-
             axios.get(url).then((response) => {
                 this.id = response.data.id;
                 this.name = response.data.name;
@@ -90,6 +85,9 @@
         },
         methods:{
             update: function(event){
+                this.success = false;
+                this.loader = true;
+
                 let url = 'http://desafio.test/api/users/'+this.$route.params.id;
                 let user = {
                     id: this.id,
@@ -105,7 +103,9 @@
                 }).catch(error => {
                     this.error = true;
                     this.success = false;
-                })
+                }).finally(()=>{
+                    this.loader = false;
+                });
             }
         }
     }
