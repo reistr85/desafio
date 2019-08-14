@@ -49,7 +49,7 @@
         data: function () {
             //let url = 'https://jsonplaceholder.typicode.com/users/'+this.$route.params.id;
             //let url = 'http://desafio.test/api/users/'+this.$route.params.id;
-            let url = 'https://aw-desafio.herokuapp.com/users/'+this.$route.params.id;
+            let url = 'https://aw-desafio.herokuapp.com/api/users/'+this.$route.params.id;
             axios.get(url).then((response) => {
                 this.user = response.data;
             }).catch(error => {

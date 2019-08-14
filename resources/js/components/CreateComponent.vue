@@ -92,7 +92,7 @@
                 this.loader = true;
                 this.msgErrors = [];
                 //let url = 'http://desafio.test/api/users';
-                let url = 'https://aw-desafio.herokuapp.com/users';
+                let url = 'https://aw-desafio.herokuapp.com/api/users';
                 let user = {
                     id: this.id,
                     name: this.name,

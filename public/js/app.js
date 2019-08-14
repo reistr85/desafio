@@ -1933,7 +1933,7 @@ __webpack_require__.r(__webpack_exports__);
       this.loader = true;
       this.msgErrors = []; //let url = 'http://desafio.test/api/users';
 
-      var url = 'https://aw-desafio.herokuapp.com/users';
+      var url = 'https://aw-desafio.herokuapp.com/api/users';
       var user = {
         id: this.id,
         name: this.name,
@@ -2032,7 +2032,7 @@ __webpack_require__.r(__webpack_exports__);
 
     //let url = 'https://jsonplaceholder.typicode.com/users/'+this.$route.params.id;
     //let url = 'http://desafio.test/api/users/'+this.$route.params.id;
-    var url = 'https://aw-desafio.herokuapp.com/users/' + this.$route.params.id;
+    var url = 'https://aw-desafio.herokuapp.com/api/users/' + this.$route.params.id;
     axios.get(url).then(function (response) {
       _this.user = response.data;
     })["catch"](function (error) {})["finally"](function () {
@@ -2049,7 +2049,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (confirm("Deseja realmente exlcuir este usuário?")) {
         //let url = 'http://desafio.test/api/users/'+id;
-        var url = 'https://aw-desafio.herokuapp.com/users/' + id;
+        var url = 'https://aw-desafio.herokuapp.com/api/users/' + id;
         axios["delete"](url).then(function (response) {
           alert('Excluido com sucesso!');
 
@@ -2135,7 +2135,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     //let url = 'http://desafio.test/api/users/'+this.$route.params.id+"/edit";
-    var url = 'https://aw-desafio.herokuapp.com/users/' + this.$route.params.id + "/edit";
+    var url = 'https://aw-desafio.herokuapp.com/api/users/' + this.$route.params.id + "/edit";
     axios.get(url).then(function (response) {
       _this.id = response.data.id;
       _this.name = response.data.name;
@@ -2161,7 +2161,7 @@ __webpack_require__.r(__webpack_exports__);
       this.success = false;
       this.loader = true; //let url = 'http://desafio.test/api/users/'+this.$route.params.id;
 
-      var url = 'https://aw-desafio.herokuapp.com/users/' + this.$route.params.id;
+      var url = 'https://aw-desafio.herokuapp.com/api/users/' + this.$route.params.id;
       var user = {
         id: this.id,
         name: this.name,
@@ -2344,7 +2344,7 @@ __webpack_require__.r(__webpack_exports__);
 
     //let url = 'https://jsonplaceholder.typicode.com/users/'+this.$route.params.id;
     //let url = 'http://desafio.test/api/users/'+this.$route.params.id;
-    var url = 'https://aw-desafio.herokuapp.com/users/' + this.$route.params.id;
+    var url = 'https://aw-desafio.herokuapp.com/api/users/' + this.$route.params.id;
     axios.get(url).then(function (response) {
       _this.user = response.data;
     })["catch"](function (error) {})["finally"](function () {
@@ -2425,7 +2425,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     //let url = 'http://desafio.test/api/users';
-    var url = 'https://aw-desafio.herokuapp.com/users';
+    var url = 'https://aw-desafio.herokuapp.com/api/users';
     axios.get(url).then(function (response) {
       _this.users = response.data;
     })["catch"](function (error) {})["finally"](function () {
