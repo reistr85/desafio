@@ -48,6 +48,7 @@ class TaskController extends Controller
 
         $task = [
             'description' => $formData['description'],
+            'status' => $formData['status'],
         ];
 
         return response()->json($this->tasks->create($task), 200);

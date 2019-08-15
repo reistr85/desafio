@@ -111,7 +111,7 @@
                     this.update();
                 }else {
                     this.loader = true;
-                    let taks = { description: this.todo }
+                    let taks = { description: this.todo, status: 0 }
 
                     axios.post(this.$BASE_URL+"tasks", taks).then(response => {
                         this.todos.push({

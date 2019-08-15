@@ -2489,7 +2489,8 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.loader = true;
         var taks = {
-          description: this.todo
+          description: this.todo,
+          status: 0
         };
         axios.post(this.$BASE_URL + "tasks", taks).then(function (response) {
           _this2.todos.push({
