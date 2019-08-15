@@ -84,7 +84,7 @@ class TaskController extends Controller
      */
     public function update(FormRequestTask $request, $id)
     {
-        //
+        return response()->json($this->tasks->find($id)->update($request->all()), 200);
     }
 
     /**

@@ -30,7 +30,8 @@
                                         :key="index"
                                         class="list-group-item list-group-item-action"
                                         @click="options(todo.id, index)">
-                                        {{ todo.description}} <span class="font-italic text-success">{{ todo.textCompleted }}</span>
+                                        {{ todo.description }}
+                                        <span class="font-italic text-success" v-if="todo.status"> - Completed</span>
                                     </button>
                                 </div>
                             </div>
@@ -54,16 +55,9 @@
 
                             <button
                                     class="btn btn-success btn-sm float-right ml-1"
-                                    @click="check"
+                                    @click="update(true)"
                                     v-if="actions">
                                 <i class="fa fa-check"></i>
-                            </button>
-
-                            <button
-                                    class="btn btn-success btn-sm float-left ml-1"
-                                    v-if="eyeConfirm"
-                                    @click="confirm" >
-                                confirm
                             </button>
                         </div>
 
@@ -81,21 +75,26 @@
 </template>
 
 <script>
+
+    const BASE_URL = 'http://desafio.test/api/tasks/';
+    //const BASE_URL = 'https://aw-desafio.herokuapp.com/api/tasks/';
+
     export default {
         data: function () {
-
-            this.getall();
-
             return {
                 todos: [],
                 todo: '',
                 loader: true,
                 actions: false,
-                indexSelected: '',
+                indexSelected: null,
                 idSelected: 0,
-                eyeConfirm: false,
                 msgErrors: [],
+                activeEdit: false
             }
+        },
+        mounted: function(){
+            console.log(BASE_URL);
+            this.getall();
         },
         methods: {
             options(id, index){
@@ -104,65 +103,83 @@
                 this.idSelected = id;
             },
             getall(){
-                let url = 'http://desafio.test/api/tasks';
-                //let url = 'https://aw-desafio.herokuapp.com/api/tasks';
-
-                axios.get(url).then((response) => {
+                axios.get(BASE_URL).then((response) => {
                     this.todos = response.data;
-                }).catch(error => {
-
+                }).catch(({response}) => {
+                    this.msgErrors = response.data.errors;
                 }).finally(()=>{
-                    this.loader = false;
+                    this.resete();
                 });
             },
             addTodo(){
+                if(this.activeEdit){
+                    this.update();
+                }else {
+                    this.loader = true;
+                    let taks = { description: this.todo }
 
-                this.loader = true;
-                let url = 'http://desafio.test/api/tasks';
-                //let url = 'https://aw-desafio.herokuapp.com/api/task';
-
-                let taks = { description: this.todo }
-
-                axios.post(url, taks).then(response => {
-                    this.todos.push({ id: response.data.id, description: response.data.description, textCompleted: null });
-                    this.success = true;
-                    this.error = false;
-                    this.msgErrors = [];
-                    this.todo = '';
-                }).catch(({response}) => {
-                    this.msgErrors = response.data.errors;
-                    this.error = true;
-                    this.success = false;
-                }).finally(()=>{
-                    this.loader = false;
-                });
+                    axios.post(BASE_URL, taks).then(response => {
+                        this.todos.push({
+                            id: response.data.id,
+                            description: response.data.description,
+                            textCompleted: null
+                        });
+                        this.success = true;
+                        this.error = false;
+                    }).catch(({response}) => {
+                        this.msgErrors = response.data.errors;
+                        this.error = true;
+                        this.success = false;
+                    }).finally(() => {
+                        this.resete();
+                    });
+                }
             },
             remove(){
                 if(confirm("Deseja realmente exlcuir este task?")){
-                    let url = 'http://desafio.test/api/tasks/'+this.idSelected;
-                    //let url = 'https://aw-desafio.herokuapp.com/api/tasks/'+this.idSelected;
-
-                    axios.delete(url).then((response) => {
+                    axios.delete(BASE_URL+this.idSelected).then((response) => {
                         this.todos.splice(this.indexSelected, 1);
                         this.actions = false;
-                        alert('Excluido com sucesso!');
                     }).catch(({response}) => {
                         this.msgErrors = response.data.errors;
                     }).finally(()=>{
-                        this.loader = false;
+                        this.resete();
                     });
                 }
             },edit(){
-                this.todo =  this.todos[this.indexSelected].description;
-                this.eyeConfirm = true;
-                this.actions = false;
-            },check(){
-                this.todos[this.indexSelected].textCompleted = ' - Completed';
-                this.actions = false;
-            },confirm(){
-                this.todos[this.indexSelected].description = this.todo;
+                this.todo = this.todos[this.indexSelected].description;
+                this.activeEdit = true;
+            }
+            ,update(completed = false){
+                let task = { description: this.todo }
+
+                if(completed){
+                    task.description = this.todos[this.indexSelected].description;
+                    task.status = 1;
+                }
+
+                axios.put(BASE_URL+this.idSelected, task).then(response => {
+                    this.success = true;
+                    this.error = false;
+                    this.todos[this.indexSelected].description = task.description;
+                    this.todos[this.indexSelected].status = task.status;
+                    console.log(response);
+                }).catch(error => {
+                    this.error = true;
+                    this.success = false;
+                }).finally(()=>{
+                    this.resete();
+                });
+
+            },
+            resete(){
                 this.todo = '';
-                this.eyeConfirm = false;
+                this.loader = false;
+                this.actions = false;
+                this.indexSelected = null;
+                this.idSelected = 0;
+                this.msgErrors = [];
+                this.activeEdit = false;
             }
         }
     }

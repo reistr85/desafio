@@ -2414,25 +2414,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
+var BASE_URL = 'http://desafio.test/api/tasks/'; //const BASE_URL = 'https://aw-desafio.herokuapp.com/api/tasks/';
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    this.getall();
     return {
       todos: [],
       todo: '',
       loader: true,
       actions: false,
-      indexSelected: '',
+      indexSelected: null,
       idSelected: 0,
-      eyeConfirm: false,
-      msgErrors: []
+      msgErrors: [],
+      activeEdit: false
     };
+  },
+  mounted: function mounted() {
+    console.log(BASE_URL);
+    this.getall();
   },
   methods: {
     options: function options(id, index) {
@@ -2443,75 +2442,98 @@ __webpack_require__.r(__webpack_exports__);
     getall: function getall() {
       var _this = this;
 
-      var url = 'http://desafio.test/api/tasks'; //let url = 'https://aw-desafio.herokuapp.com/api/tasks';
-
-      axios.get(url).then(function (response) {
+      axios.get(BASE_URL).then(function (response) {
         _this.todos = response.data;
-      })["catch"](function (error) {})["finally"](function () {
-        _this.loader = false;
+      })["catch"](function (_ref) {
+        var response = _ref.response;
+        _this.msgErrors = response.data.errors;
+      })["finally"](function () {
+        _this.resete();
       });
     },
     addTodo: function addTodo() {
       var _this2 = this;
 
-      this.loader = true;
-      var url = 'http://desafio.test/api/tasks'; //let url = 'https://aw-desafio.herokuapp.com/api/task';
+      if (this.activeEdit) {
+        this.update();
+      } else {
+        this.loader = true;
+        var taks = {
+          description: this.todo
+        };
+        axios.post(BASE_URL, taks).then(function (response) {
+          _this2.todos.push({
+            id: response.data.id,
+            description: response.data.description,
+            textCompleted: null
+          });
 
-      var taks = {
-        description: this.todo
-      };
-      axios.post(url, taks).then(function (response) {
-        _this2.todos.push({
-          id: response.data.id,
-          description: response.data.description,
-          textCompleted: null
+          _this2.success = true;
+          _this2.error = false;
+        })["catch"](function (_ref2) {
+          var response = _ref2.response;
+          _this2.msgErrors = response.data.errors;
+          _this2.error = true;
+          _this2.success = false;
+        })["finally"](function () {
+          _this2.resete();
         });
-
-        _this2.success = true;
-        _this2.error = false;
-        _this2.msgErrors = [];
-        _this2.todo = '';
-      })["catch"](function (_ref) {
-        var response = _ref.response;
-        _this2.msgErrors = response.data.errors;
-        _this2.error = true;
-        _this2.success = false;
-      })["finally"](function () {
-        _this2.loader = false;
-      });
+      }
     },
     remove: function remove() {
       var _this3 = this;
 
       if (confirm("Deseja realmente exlcuir este task?")) {
-        var url = 'http://desafio.test/api/tasks/' + this.idSelected; //let url = 'https://aw-desafio.herokuapp.com/api/tasks/'+this.idSelected;
-
-        axios["delete"](url).then(function (response) {
+        axios["delete"](BASE_URL + this.idSelected).then(function (response) {
           _this3.todos.splice(_this3.indexSelected, 1);
 
           _this3.actions = false;
-          alert('Excluido com sucesso!');
-        })["catch"](function (_ref2) {
-          var response = _ref2.response;
+        })["catch"](function (_ref3) {
+          var response = _ref3.response;
           _this3.msgErrors = response.data.errors;
         })["finally"](function () {
-          _this3.loader = false;
+          _this3.resete();
         });
       }
     },
     edit: function edit() {
       this.todo = this.todos[this.indexSelected].description;
-      this.eyeConfirm = true;
-      this.actions = false;
+      this.activeEdit = true;
     },
-    check: function check() {
-      this.todos[this.indexSelected].textCompleted = ' - Completed';
-      this.actions = false;
+    update: function update() {
+      var _this4 = this;
+
+      var completed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var task = {
+        description: this.todo
+      };
+
+      if (completed) {
+        task.description = this.todos[this.indexSelected].description;
+        task.status = 1;
+      }
+
+      axios.put(BASE_URL + this.idSelected, task).then(function (response) {
+        _this4.success = true;
+        _this4.error = false;
+        _this4.todos[_this4.indexSelected].description = task.description;
+        _this4.todos[_this4.indexSelected].status = task.status;
+        console.log(response);
+      })["catch"](function (error) {
+        _this4.error = true;
+        _this4.success = false;
+      })["finally"](function () {
+        _this4.resete();
+      });
     },
-    confirm: function confirm() {
-      this.todos[this.indexSelected].description = this.todo;
+    resete: function resete() {
       this.todo = '';
-      this.eyeConfirm = false;
+      this.loader = false;
+      this.actions = false;
+      this.indexSelected = null;
+      this.idSelected = 0;
+      this.msgErrors = [];
+      this.activeEdit = false;
     }
   }
 });
@@ -38920,13 +38942,15 @@ var render = function() {
                         _vm._v(
                           "\n                                    " +
                             _vm._s(todo.description) +
-                            " "
+                            "\n                                    "
                         ),
-                        _c(
-                          "span",
-                          { staticClass: "font-italic text-success" },
-                          [_vm._v(_vm._s(todo.textCompleted))]
-                        )
+                        todo.status
+                          ? _c(
+                              "span",
+                              { staticClass: "font-italic text-success" },
+                              [_vm._v(" - Completed")]
+                            )
+                          : _vm._e()
                       ]
                     )
                   }),
@@ -38963,24 +38987,13 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-success btn-sm float-right ml-1",
-                      on: { click: _vm.check }
+                      on: {
+                        click: function($event) {
+                          return _vm.update(true)
+                        }
+                      }
                     },
                     [_c("i", { staticClass: "fa fa-check" })]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.eyeConfirm
-                ? _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success btn-sm float-left ml-1",
-                      on: { click: _vm.confirm }
-                    },
-                    [
-                      _vm._v(
-                        "\n                            confirm\n                        "
-                      )
-                    ]
                   )
                 : _vm._e()
             ]),

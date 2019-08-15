@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/css/app.css">
 
-    <title>Hello, world!</title>
+    <title>Desafio Laravel + Vue JS</title>
 
     <style>
         .loader {
