@@ -7,7 +7,7 @@
 
                     <div class="card-body">
 
-                        <form @submit.prevent="addTodo">
+                        <form @submit.prevent="store">
                             <input
                                 id="todo"
                                 name="todo"
@@ -75,9 +75,7 @@
 </template>
 
 <script>
-
-    const BASE_URL = 'http://desafio.test/api/tasks/';
-    //const BASE_URL = 'https://aw-desafio.herokuapp.com/api/tasks/';
+    import Constants from '../constants.js';
 
     export default {
         data: function () {
@@ -103,7 +101,7 @@
                 this.idSelected = id;
             },
             getall(){
-                axios.get(BASE_URL).then((response) => {
+                axios.get(BASE_URL+"tasks").then((response) => {
                     this.todos = response.data;
                 }).catch(({response}) => {
                     this.msgErrors = response.data.errors;
@@ -111,14 +109,14 @@
                     this.resete();
                 });
             },
-            addTodo(){
+            store(){
                 if(this.activeEdit){
                     this.update();
                 }else {
                     this.loader = true;
                     let taks = { description: this.todo }
 
-                    axios.post(BASE_URL, taks).then(response => {
+                    axios.post(BASE_URL+"tasks", taks).then(response => {
                         this.todos.push({
                             id: response.data.id,
                             description: response.data.description,
@@ -137,7 +135,7 @@
             },
             remove(){
                 if(confirm("Deseja realmente exlcuir este task?")){
-                    axios.delete(BASE_URL+this.idSelected).then((response) => {
+                    axios.delete(BASE_URL+"tasks/"+this.idSelected).then((response) => {
                         this.todos.splice(this.indexSelected, 1);
                         this.actions = false;
                     }).catch(({response}) => {
@@ -158,7 +156,7 @@
                     task.status = 1;
                 }
 
-                axios.put(BASE_URL+this.idSelected, task).then(response => {
+                axios.put(BASE_URL+"tasks/"+this.idSelected, task).then(response => {
                     this.success = true;
                     this.error = false;
                     this.todos[this.indexSelected].description = task.description;

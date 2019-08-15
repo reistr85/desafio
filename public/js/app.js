@@ -1838,8 +1838,10 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
-/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants.js */ "./resources/js/constants.js");
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_constants_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -1909,9 +1911,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   directives: {
-    mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["mask"]
+    mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_1__["mask"]
   },
   data: function data() {
     return {
@@ -1931,9 +1934,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.loader = true;
-      this.msgErrors = []; //let url = 'http://desafio.test/api/users';
-
-      var url = 'https://aw-desafio.herokuapp.com/api/users';
+      this.msgErrors = [];
       var user = {
         id: this.id,
         name: this.name,
@@ -1941,7 +1942,7 @@ __webpack_require__.r(__webpack_exports__);
         phone: this.phone,
         password: this.password
       };
-      axios.post(url, user).then(function (response) {
+      axios.post(BASE_URL + "users", user).then(function (response) {
         _this.success = true;
         _this.error = false;
 
@@ -1976,6 +1977,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants.js */ "./resources/js/constants.js");
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_constants_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2026,33 +2029,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    var _this = this;
-
-    //let url = 'https://jsonplaceholder.typicode.com/users/'+this.$route.params.id;
-    //let url = 'http://desafio.test/api/users/'+this.$route.params.id;
-    var url = 'https://aw-desafio.herokuapp.com/api/users/' + this.$route.params.id;
-    axios.get(url).then(function (response) {
-      _this.user = response.data;
-    })["catch"](function (error) {})["finally"](function () {
-      _this.loader = false;
-    });
     return {
       user: [],
       loader: true
     };
   },
+  mounted: function mounted() {
+    this.getUserSelected();
+  },
   methods: {
+    getUserSelected: function getUserSelected() {
+      var _this = this;
+
+      axios.get(BASE_URL + "users/" + this.$route.params.id).then(function (response) {
+        _this.user = response.data;
+      })["catch"](function (error) {})["finally"](function () {
+        _this.loader = false;
+      });
+    },
     destroy: function destroy(id) {
       var _this2 = this;
 
       if (confirm("Deseja realmente exlcuir este usuário?")) {
-        //let url = 'http://desafio.test/api/users/'+id;
-        var url = 'https://aw-desafio.herokuapp.com/api/users/' + id;
-        axios["delete"](url).then(function (response) {
-          alert('Excluido com sucesso!');
-
+        axios["delete"](BASE_URL + "users/" + id).then(function (response) {
           _this2.$router.push('/users');
         });
       }
@@ -2066,6 +2068,131 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditComponent.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants.js */ "./resources/js/constants.js");
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_constants_js__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      phone: this.phone,
+      error: false,
+      success: false,
+      loader: true
+    };
+  },
+  mounted: function mounted() {
+    this.getAll();
+  },
+  methods: {
+    getAll: function getAll() {
+      var _this = this;
+
+      axios.get(BASE_URL + "users/" + this.$route.params.id).then(function (response) {
+        _this.id = response.data.id;
+        _this.name = response.data.name;
+        _this.email = response.data.email;
+        _this.phone = response.data.phone;
+      })["catch"](function (error) {})["finally"](function () {
+        _this.loader = false;
+      });
+    },
+    update: function update(event) {
+      var _this2 = this;
+
+      this.success = false;
+      this.loader = true;
+      var user = {
+        id: this.id,
+        name: this.name,
+        email: this.email,
+        phone: this.phone
+      };
+      axios.put(BASE_URL + "users/" + this.$route.params.id, user).then(function (response) {
+        _this2.success = true;
+        _this2.error = false;
+      })["catch"](function (error) {
+        _this2.error = true;
+        _this2.success = false;
+      })["finally"](function () {
+        _this2.loader = false;
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2087,107 +2214,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    var _this = this;
-
-    //let url = 'http://desafio.test/api/users/'+this.$route.params.id+"/edit";
-    var url = 'https://aw-desafio.herokuapp.com/api/users/' + this.$route.params.id + "/edit";
-    axios.get(url).then(function (response) {
-      _this.id = response.data.id;
-      _this.name = response.data.name;
-      _this.email = response.data.email;
-      _this.phone = response.data.phone;
-    })["catch"](function (error) {})["finally"](function () {
-      _this.loader = false;
-    });
-    return {
-      id: this.id,
-      name: this.name,
-      email: this.email,
-      phone: this.phone,
-      error: false,
-      success: false,
-      loader: true
-    };
-  },
-  methods: {
-    update: function update(event) {
-      var _this2 = this;
-
-      this.success = false;
-      this.loader = true; //let url = 'http://desafio.test/api/users/'+this.$route.params.id;
-
-      var url = 'https://aw-desafio.herokuapp.com/api/users/' + this.$route.params.id;
-      var user = {
-        id: this.id,
-        name: this.name,
-        email: this.email,
-        phone: this.phone
-      };
-      console.log(user.name);
-      axios.put(url, user).then(function (response) {
-        _this2.success = true;
-        _this2.error = false;
-      })["catch"](function (error) {
-        _this2.error = true;
-        _this2.success = false;
-      })["finally"](function () {
-        _this2.loader = false;
-      });
-    }
+  mounted: function mounted() {
+    console.log('Component mounted.');
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HomeComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HomeComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2262,6 +2300,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants.js */ "./resources/js/constants.js");
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_constants_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2308,22 +2348,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    var _this = this;
-
-    //let url = 'https://jsonplaceholder.typicode.com/users/'+this.$route.params.id;
-    //let url = 'http://desafio.test/api/users/'+this.$route.params.id;
-    var url = 'https://aw-desafio.herokuapp.com/api/users/' + this.$route.params.id;
-    axios.get(url).then(function (response) {
-      _this.user = response.data;
-    })["catch"](function (error) {})["finally"](function () {
-      _this.loader = false;
-    });
     return {
       user: [],
       loader: true
     };
+  },
+  mounted: function mounted() {
+    this.show();
+  },
+  methods: {
+    show: function show() {
+      var _this = this;
+
+      axios.get(BASE_URL + "users/" + this.$route.params.id).then(function (response) {
+        _this.user = response.data;
+      })["catch"](function (error) {})["finally"](function () {
+        _this.loader = false;
+      });
+    }
   }
 });
 
@@ -2338,6 +2383,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants.js */ "./resources/js/constants.js");
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_constants_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2414,7 +2461,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var BASE_URL = 'http://desafio.test/api/tasks/'; //const BASE_URL = 'https://aw-desafio.herokuapp.com/api/tasks/';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2442,7 +2488,7 @@ var BASE_URL = 'http://desafio.test/api/tasks/'; //const BASE_URL = 'https://aw-
     getall: function getall() {
       var _this = this;
 
-      axios.get(BASE_URL).then(function (response) {
+      axios.get(BASE_URL + "tasks").then(function (response) {
         _this.todos = response.data;
       })["catch"](function (_ref) {
         var response = _ref.response;
@@ -2451,7 +2497,7 @@ var BASE_URL = 'http://desafio.test/api/tasks/'; //const BASE_URL = 'https://aw-
         _this.resete();
       });
     },
-    addTodo: function addTodo() {
+    store: function store() {
       var _this2 = this;
 
       if (this.activeEdit) {
@@ -2461,7 +2507,7 @@ var BASE_URL = 'http://desafio.test/api/tasks/'; //const BASE_URL = 'https://aw-
         var taks = {
           description: this.todo
         };
-        axios.post(BASE_URL, taks).then(function (response) {
+        axios.post(BASE_URL + "tasks", taks).then(function (response) {
           _this2.todos.push({
             id: response.data.id,
             description: response.data.description,
@@ -2484,7 +2530,7 @@ var BASE_URL = 'http://desafio.test/api/tasks/'; //const BASE_URL = 'https://aw-
       var _this3 = this;
 
       if (confirm("Deseja realmente exlcuir este task?")) {
-        axios["delete"](BASE_URL + this.idSelected).then(function (response) {
+        axios["delete"](BASE_URL + "tasks/" + this.idSelected).then(function (response) {
           _this3.todos.splice(_this3.indexSelected, 1);
 
           _this3.actions = false;
@@ -2513,7 +2559,7 @@ var BASE_URL = 'http://desafio.test/api/tasks/'; //const BASE_URL = 'https://aw-
         task.status = 1;
       }
 
-      axios.put(BASE_URL + this.idSelected, task).then(function (response) {
+      axios.put(BASE_URL + "tasks/" + this.idSelected, task).then(function (response) {
         _this4.success = true;
         _this4.error = false;
         _this4.todos[_this4.indexSelected].description = task.description;
@@ -2549,6 +2595,8 @@ var BASE_URL = 'http://desafio.test/api/tasks/'; //const BASE_URL = 'https://aw-
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants.js */ "./resources/js/constants.js");
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_constants_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2601,21 +2649,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    var _this = this;
-
-    //let url = 'http://desafio.test/api/users';
-    var url = 'https://aw-desafio.herokuapp.com/api/users';
-    axios.get(url).then(function (response) {
-      _this.users = response.data;
-    })["catch"](function (error) {})["finally"](function () {
-      _this.loader = false;
-    });
     return {
       users: [],
       loader: true
     };
+  },
+  mounted: function mounted() {
+    this.getAll();
+  },
+  methods: {
+    getAll: function getAll() {
+      var _this = this;
+
+      axios.get(BASE_URL + "users").then(function (response) {
+        _this.users = response.data;
+      })["catch"](function (error) {})["finally"](function () {
+        _this.loader = false;
+      });
+    }
   }
 });
 
@@ -38643,6 +38697,54 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container mt-3" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [_vm._v("Início")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("p", { attrs: { align: "center" } }, [
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: { src: "/images/logo.png", alt: "Desafio ESIG" }
+                })
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/NavComponent.vue?vue&type=template&id=152c8205&":
 /*!***************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/NavComponent.vue?vue&type=template&id=152c8205& ***!
@@ -38881,7 +38983,7 @@ var render = function() {
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.addTodo($event)
+                    return _vm.store($event)
                   }
                 }
               },
@@ -54203,8 +54305,11 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"], vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a, vue_the_mask__WEBPACK_IMPORTED_MODULE_3___default.a);
-var routes = [//{ path: '/', name: 'home', component: require('./components/HomeComponent.vue').default },
-//USERS
+var routes = [{
+  path: '/',
+  name: 'home',
+  component: __webpack_require__(/*! ./components/HomeComponent.vue */ "./resources/js/components/HomeComponent.vue")["default"]
+}, //USERS
 {
   path: '/users',
   component: __webpack_require__(/*! ./components/UsersComponent.vue */ "./resources/js/components/UsersComponent.vue")["default"]
@@ -54226,7 +54331,7 @@ var routes = [//{ path: '/', name: 'home', component: require('./components/Home
   component: __webpack_require__(/*! ./components/DeleteComponent.vue */ "./resources/js/components/DeleteComponent.vue")["default"]
 }, //TODOS
 {
-  path: '/',
+  path: '/todo',
   component: __webpack_require__(/*! ./components/TodoComponent.vue */ "./resources/js/components/TodoComponent.vue")["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
@@ -54576,6 +54681,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/HomeComponent.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/HomeComponent.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HomeComponent.vue?vue&type=template&id=782dcf83& */ "./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&");
+/* harmony import */ var _HomeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HomeComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/HomeComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _HomeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/HomeComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/HomeComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/HomeComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./HomeComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HomeComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./HomeComponent.vue?vue&type=template&id=782dcf83& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HomeComponent.vue?vue&type=template&id=782dcf83&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HomeComponent_vue_vue_type_template_id_782dcf83___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/NavComponent.vue":
 /*!**************************************************!*\
   !*** ./resources/js/components/NavComponent.vue ***!
@@ -54849,6 +55023,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UsersComponent_vue_vue_type_template_id_47d47080___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/constants.js":
+/*!***********************************!*\
+  !*** ./resources/js/constants.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+//BASE_URL = 'http://desafio.test/api/';
+var BASE_URL = 'https://aw-desafio.herokuapp.com/api/tasks';
 
 /***/ }),
 

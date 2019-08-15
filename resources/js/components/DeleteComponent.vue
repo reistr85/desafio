@@ -49,31 +49,31 @@
 </template>
 
 <script>
+    import Constants from '../constants.js';
+
     export default {
         data: function () {
-            //let url = 'https://jsonplaceholder.typicode.com/users/'+this.$route.params.id;
-            //let url = 'http://desafio.test/api/users/'+this.$route.params.id;
-            let url = 'https://aw-desafio.herokuapp.com/api/users/'+this.$route.params.id;
-            axios.get(url).then((response) => {
-                this.user = response.data;
-            }).catch(error => {
-
-            }).finally(()=>{
-                this.loader = false;
-            });
-
             return {
                 user: [],
                 loader: true
             }
         },
+        mounted: function(){
+            this.getUserSelected()
+        },
         methods: {
+            getUserSelected: function(){
+                axios.get(BASE_URL+"users/"+this.$route.params.id).then((response) => {
+                    this.user = response.data;
+                }).catch(error => {
+
+                }).finally(()=>{
+                    this.loader = false;
+                });
+            },
             destroy: function(id){
                 if(confirm("Deseja realmente exlcuir este usuário?")){
-                    //let url = 'http://desafio.test/api/users/'+id;
-                    let url = 'https://aw-desafio.herokuapp.com/api/users/'+id;
-                    axios.delete(url).then((response) => {
-                        alert('Excluido com sucesso!');
+                    axios.delete(BASE_URL+"users/"+id).then((response) => {
                         this.$router.push('/users');
                     });
                 }

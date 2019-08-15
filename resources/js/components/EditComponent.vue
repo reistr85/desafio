@@ -58,22 +58,10 @@
 </template>
 
 <script>
+    import Constants from '../constants.js';
+
     export default {
         data: function () {
-            //let url = 'http://desafio.test/api/users/'+this.$route.params.id+"/edit";
-            let url = 'https://aw-desafio.herokuapp.com/api/users/'+this.$route.params.id+"/edit";
-
-            axios.get(url).then((response) => {
-                this.id = response.data.id;
-                this.name = response.data.name;
-                this.email = response.data.email;
-                this.phone = response.data.phone;
-            }).catch(error => {
-
-            }).finally(()=>{
-                this.loader = false;
-            });
-
             return {
                 id: this.id,
                 name: this.name,
@@ -84,22 +72,34 @@
                 loader: true
             }
         },
+        mounted: function(){
+            this.getAll();
+        },
         methods:{
+            getAll: function(){
+                axios.get(BASE_URL+"users/"+this.$route.params.id).then((response) => {
+                    this.id = response.data.id;
+                    this.name = response.data.name;
+                    this.email = response.data.email;
+                    this.phone = response.data.phone;
+                }).catch(error => {
+
+                }).finally(()=>{
+                    this.loader = false;
+                });
+            },
             update: function(event){
                 this.success = false;
                 this.loader = true;
 
-                //let url = 'http://desafio.test/api/users/'+this.$route.params.id;
-                let url = 'https://aw-desafio.herokuapp.com/api/users/'+this.$route.params.id;
                 let user = {
                     id: this.id,
                     name: this.name,
                     email: this.email,
                     phone: this.phone,
                 }
-                console.log(user.name);
 
-                axios.put(url, user).then(response => {
+                axios.put(BASE_URL+"users/"+this.$route.params.id, user).then(response => {
                     this.success = true;
                     this.error = false;
                 }).catch(error => {

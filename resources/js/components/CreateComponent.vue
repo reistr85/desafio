@@ -67,7 +67,8 @@
 </template>
 
 <script>
-    import {mask} from 'vue-the-mask';
+    import Constants from '../constants.js';
+    import { mask } from 'vue-the-mask';
 
     export default {
         directives: {
@@ -91,8 +92,7 @@
             store: function(event){
                 this.loader = true;
                 this.msgErrors = [];
-                //let url = 'http://desafio.test/api/users';
-                let url = 'https://aw-desafio.herokuapp.com/api/users';
+
                 let user = {
                     id: this.id,
                     name: this.name,
@@ -101,7 +101,7 @@
                     password: this.password,
                 }
 
-                axios.post(url, user).then(response => {
+                axios.post(BASE_URL+"users", user).then(response => {
                     this.success = true;
                     this.error = false;
                     this.reseteData();

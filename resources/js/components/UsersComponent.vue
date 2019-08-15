@@ -51,22 +51,27 @@
 </template>
 
 <script>
+    import Constants from '../constants.js';
+
     export default {
         data: function () {
-            //let url = 'http://desafio.test/api/users';
-            let url = 'https://aw-desafio.herokuapp.com/api/users';
-
-            axios.get(url).then((response) => {
-                this.users = response.data;
-            }).catch(error => {
-
-            }).finally(()=>{
-                this.loader = false;
-            });
-
             return {
                 users: [],
                 loader: true
+            }
+        },
+        mounted() {
+            this.getAll();
+        },
+        methods: {
+            getAll: function(){
+                axios.get(BASE_URL+"users").then((response) => {
+                    this.users = response.data;
+                }).catch(error => {
+
+                }).finally(()=>{
+                    this.loader = false;
+                });
             }
         }
     }
