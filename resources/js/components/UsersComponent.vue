@@ -51,8 +51,6 @@
 </template>
 
 <script>
-    import Constants from '../constants.js';
-
     export default {
         data: function () {
             return {
@@ -65,7 +63,7 @@
         },
         methods: {
             getAll: function(){
-                axios.get(BASE_URL+"users").then((response) => {
+                axios.get(this.$BASE_URL+"users").then((response) => {
                     this.users = response.data;
                 }).catch(error => {
 

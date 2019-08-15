@@ -75,8 +75,6 @@
 </template>
 
 <script>
-    import Constants from '../constants.js';
-
     export default {
         data: function () {
             return {
@@ -91,7 +89,6 @@
             }
         },
         mounted: function(){
-            console.log(BASE_URL);
             this.getall();
         },
         methods: {
@@ -101,7 +98,7 @@
                 this.idSelected = id;
             },
             getall(){
-                axios.get(BASE_URL+"tasks").then((response) => {
+                axios.get(this.$BASE_URL+"tasks").then((response) => {
                     this.todos = response.data;
                 }).catch(({response}) => {
                     this.msgErrors = response.data.errors;
@@ -116,7 +113,7 @@
                     this.loader = true;
                     let taks = { description: this.todo }
 
-                    axios.post(BASE_URL+"tasks", taks).then(response => {
+                    axios.post(this.$BASE_URL+"tasks", taks).then(response => {
                         this.todos.push({
                             id: response.data.id,
                             description: response.data.description,
@@ -135,7 +132,7 @@
             },
             remove(){
                 if(confirm("Deseja realmente exlcuir este task?")){
-                    axios.delete(BASE_URL+"tasks/"+this.idSelected).then((response) => {
+                    axios.delete(this.$BASE_URL+"tasks/"+this.idSelected).then((response) => {
                         this.todos.splice(this.indexSelected, 1);
                         this.actions = false;
                     }).catch(({response}) => {
@@ -156,12 +153,11 @@
                     task.status = 1;
                 }
 
-                axios.put(BASE_URL+"tasks/"+this.idSelected, task).then(response => {
+                axios.put(this.$BASE_URL+"tasks/"+this.idSelected, task).then(response => {
                     this.success = true;
                     this.error = false;
                     this.todos[this.indexSelected].description = task.description;
                     this.todos[this.indexSelected].status = task.status;
-                    console.log(response);
                 }).catch(error => {
                     this.error = true;
                     this.success = false;

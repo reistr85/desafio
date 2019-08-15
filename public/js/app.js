@@ -1838,10 +1838,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants.js */ "./resources/js/constants.js");
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_constants_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
-/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1910,11 +1908,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   directives: {
-    mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_1__["mask"]
+    mask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["mask"]
   },
   data: function data() {
     return {
@@ -1942,7 +1939,7 @@ __webpack_require__.r(__webpack_exports__);
         phone: this.phone,
         password: this.password
       };
-      axios.post(BASE_URL + "users", user).then(function (response) {
+      axios.post(this.$BASE_URL + "users", user).then(function (response) {
         _this.success = true;
         _this.error = false;
 
@@ -1977,8 +1974,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants.js */ "./resources/js/constants.js");
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_constants_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2029,7 +2024,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2044,7 +2038,7 @@ __webpack_require__.r(__webpack_exports__);
     getUserSelected: function getUserSelected() {
       var _this = this;
 
-      axios.get(BASE_URL + "users/" + this.$route.params.id).then(function (response) {
+      axios.get(this.$BASE_URL + "users/" + this.$route.params.id).then(function (response) {
         _this.user = response.data;
       })["catch"](function (error) {})["finally"](function () {
         _this.loader = false;
@@ -2054,7 +2048,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (confirm("Deseja realmente exlcuir este usuário?")) {
-        axios["delete"](BASE_URL + "users/" + id).then(function (response) {
+        axios["delete"](this.$BASE_URL + "users/" + id).then(function (response) {
           _this2.$router.push('/users');
         });
       }
@@ -2073,8 +2067,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants.js */ "./resources/js/constants.js");
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_constants_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2134,7 +2126,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2154,7 +2145,7 @@ __webpack_require__.r(__webpack_exports__);
     getAll: function getAll() {
       var _this = this;
 
-      axios.get(BASE_URL + "users/" + this.$route.params.id).then(function (response) {
+      axios.get(this.$BASE_URL + "users/" + this.$route.params.id).then(function (response) {
         _this.id = response.data.id;
         _this.name = response.data.name;
         _this.email = response.data.email;
@@ -2174,7 +2165,7 @@ __webpack_require__.r(__webpack_exports__);
         email: this.email,
         phone: this.phone
       };
-      axios.put(BASE_URL + "users/" + this.$route.params.id, user).then(function (response) {
+      axios.put(this.$BASE_URL + "users/" + this.$route.params.id, user).then(function (response) {
         _this2.success = true;
         _this2.error = false;
       })["catch"](function (error) {
@@ -2300,8 +2291,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants.js */ "./resources/js/constants.js");
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_constants_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2348,7 +2337,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2363,7 +2351,7 @@ __webpack_require__.r(__webpack_exports__);
     show: function show() {
       var _this = this;
 
-      axios.get(BASE_URL + "users/" + this.$route.params.id).then(function (response) {
+      axios.get(this.$BASE_URL + "users/" + this.$route.params.id).then(function (response) {
         _this.user = response.data;
       })["catch"](function (error) {})["finally"](function () {
         _this.loader = false;
@@ -2383,8 +2371,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants.js */ "./resources/js/constants.js");
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_constants_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2461,7 +2447,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2476,7 +2461,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    console.log(BASE_URL);
     this.getall();
   },
   methods: {
@@ -2488,7 +2472,7 @@ __webpack_require__.r(__webpack_exports__);
     getall: function getall() {
       var _this = this;
 
-      axios.get(BASE_URL + "tasks").then(function (response) {
+      axios.get(this.$BASE_URL + "tasks").then(function (response) {
         _this.todos = response.data;
       })["catch"](function (_ref) {
         var response = _ref.response;
@@ -2507,7 +2491,7 @@ __webpack_require__.r(__webpack_exports__);
         var taks = {
           description: this.todo
         };
-        axios.post(BASE_URL + "tasks", taks).then(function (response) {
+        axios.post(this.$BASE_URL + "tasks", taks).then(function (response) {
           _this2.todos.push({
             id: response.data.id,
             description: response.data.description,
@@ -2530,7 +2514,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       if (confirm("Deseja realmente exlcuir este task?")) {
-        axios["delete"](BASE_URL + "tasks/" + this.idSelected).then(function (response) {
+        axios["delete"](this.$BASE_URL + "tasks/" + this.idSelected).then(function (response) {
           _this3.todos.splice(_this3.indexSelected, 1);
 
           _this3.actions = false;
@@ -2559,12 +2543,11 @@ __webpack_require__.r(__webpack_exports__);
         task.status = 1;
       }
 
-      axios.put(BASE_URL + "tasks/" + this.idSelected, task).then(function (response) {
+      axios.put(this.$BASE_URL + "tasks/" + this.idSelected, task).then(function (response) {
         _this4.success = true;
         _this4.error = false;
         _this4.todos[_this4.indexSelected].description = task.description;
         _this4.todos[_this4.indexSelected].status = task.status;
-        console.log(response);
       })["catch"](function (error) {
         _this4.error = true;
         _this4.success = false;
@@ -2595,8 +2578,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants.js */ "./resources/js/constants.js");
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_constants_js__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2649,7 +2630,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2664,7 +2644,7 @@ __webpack_require__.r(__webpack_exports__);
     getAll: function getAll() {
       var _this = this;
 
-      axios.get(BASE_URL + "users").then(function (response) {
+      axios.get(this.$BASE_URL + "users").then(function (response) {
         _this.users = response.data;
       })["catch"](function (error) {})["finally"](function () {
         _this.loader = false;
@@ -54304,7 +54284,9 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"], vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a, vue_the_mask__WEBPACK_IMPORTED_MODULE_3___default.a);
+Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"], vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a, vue_the_mask__WEBPACK_IMPORTED_MODULE_3___default.a); //Vue.prototype.$BASE_URL = 'http://desafio.test/api/';
+
+Vue.prototype.$BASE_URL = 'https://aw-desafio.herokuapp.com/api/';
 var routes = [{
   path: '/',
   name: 'home',
@@ -55023,18 +55005,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UsersComponent_vue_vue_type_template_id_47d47080___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./resources/js/constants.js":
-/*!***********************************!*\
-  !*** ./resources/js/constants.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-//BASE_URL = 'http://desafio.test/api/';
-var BASE_URL = 'https://aw-desafio.herokuapp.com/api/tasks';
 
 /***/ }),
 

@@ -8,6 +8,8 @@ import VueAxios from 'vue-axios';
 import VueTheMask from 'vue-the-mask';
 
 Vue.use(VueRouter, VueAxios, axios, VueTheMask)
+//Vue.prototype.$BASE_URL = 'http://desafio.test/api/';
+Vue.prototype.$BASE_URL = 'https://aw-desafio.herokuapp.com/api/';
 
 let routes = [
     { path: '/', name: 'home', component: require('./components/HomeComponent.vue').default },

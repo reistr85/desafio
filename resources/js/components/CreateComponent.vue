@@ -67,7 +67,6 @@
 </template>
 
 <script>
-    import Constants from '../constants.js';
     import { mask } from 'vue-the-mask';
 
     export default {
@@ -101,7 +100,7 @@
                     password: this.password,
                 }
 
-                axios.post(BASE_URL+"users", user).then(response => {
+                axios.post(this.$BASE_URL+"users", user).then(response => {
                     this.success = true;
                     this.error = false;
                     this.reseteData();

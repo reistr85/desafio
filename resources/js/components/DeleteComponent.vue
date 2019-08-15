@@ -49,8 +49,6 @@
 </template>
 
 <script>
-    import Constants from '../constants.js';
-
     export default {
         data: function () {
             return {
@@ -63,7 +61,7 @@
         },
         methods: {
             getUserSelected: function(){
-                axios.get(BASE_URL+"users/"+this.$route.params.id).then((response) => {
+                axios.get(this.$BASE_URL+"users/"+this.$route.params.id).then((response) => {
                     this.user = response.data;
                 }).catch(error => {
 
@@ -73,7 +71,7 @@
             },
             destroy: function(id){
                 if(confirm("Deseja realmente exlcuir este usuário?")){
-                    axios.delete(BASE_URL+"users/"+id).then((response) => {
+                    axios.delete(this.$BASE_URL+"users/"+id).then((response) => {
                         this.$router.push('/users');
                     });
                 }

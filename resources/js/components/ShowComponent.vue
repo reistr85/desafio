@@ -45,8 +45,6 @@
 </template>
 
 <script>
-    import Constants from '../constants.js';
-
     export default {
         data: function () {
             return {
@@ -59,7 +57,7 @@
         },
         methods: {
             show: function(){
-                axios.get(BASE_URL+"users/"+this.$route.params.id).then((response) => {
+                axios.get(this.$BASE_URL+"users/"+this.$route.params.id).then((response) => {
                     this.user = response.data;
                 }).catch(error => {
 
