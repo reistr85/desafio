@@ -10,12 +10,17 @@ import VueTheMask from 'vue-the-mask';
 Vue.use(VueRouter, VueAxios, axios, VueTheMask)
 
 let routes = [
-    { path: '/', name: 'home', component: require('./components/HomeComponent.vue').default },
+    //{ path: '/', name: 'home', component: require('./components/HomeComponent.vue').default },
+
+    //USERS
     { path: '/users', component: require('./components/UsersComponent.vue').default },
     { path: '/show/:id', name: 'show', component: require('./components/ShowComponent.vue').default },
     { path: '/create', name: 'create', component: require('./components/CreateComponent.vue').default },
     { path: '/edit/:id', name: 'edit', component: require('./components/EditComponent.vue').default },
     { path: '/delete/:id', name: 'delete', component: require('./components/DeleteComponent.vue').default },
+
+    //TODOS
+    { path: '/', component: require('./components/TodoComponent.vue').default },
 ]
 
 const router = new VueRouter({
