@@ -37,7 +37,9 @@
 
 ### API EM LARAVEL ###
 
-* O projeto dispões de apenas uma router principal http://seuhost/api/users
+* O projeto dispões de duas routers http://seuhost/api/users
+* http://seuhost/api/todo e http://seuhost/api/users
+* Abaixo segue a lista das requições que são possíveis fazer para ambas as routers. Iremos abaixo detalhar apenas para uma das routers já que não há necessidade de detalhar as duas sendo que ambas tem os mesmos endpoints.
 * Foi criado um Controller "App\Controller\UsersController.php" do tipo Resource onde o mesmo tem os seguintes Methods:
 * 1 - Nome: index:
 * 1.1 - Tipo de Chamada: GET
@@ -68,3 +70,9 @@
 * 6.2 - Parâmetro: ID do User.
 * 6.3 - Função: Responsável por excluir um determinado User do DB.
 * 6.4 - Retorno: User em JSON.
+
+### LICENSE ###
+
+[MIT](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2019-present, Renan Reis
