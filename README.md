@@ -16,7 +16,7 @@
 
 ### INSTALAÇÃO ###
 
-* 1 - Faça o Clone deste repositório: (https://reistr@bitbucket.org/reistr/desafio-esig.git)
+* 1 - Faça o Clone deste repositório: (https://github.com/reistr85/desafio)
 * 2 - Rode os seguintes comandos no seu terminal:
 * 2.1 - composer install
 * 2.2 - npm install
@@ -33,7 +33,8 @@
 
 * Configure em sua máquina local o seguite host para rodar o projeto:
 * http://desafio.test/ e faça o apontamento para o projeto em sua máquina.
-* Caso queira usar outro HOST de sua preferência altere as URL's das chamadas 'Axios' para o HOST de sua preferência.
+* Caso queira usar outro apontamento local para o projeto basta alterar a variável BASE_URL no arquivo resources/js/app.js
+* Uma vez que o HOST esteja configurado você já pode fazer as chamadas 'Axios' para o HOST de sua preferência.
 
 ### API EM LARAVEL ###
 
