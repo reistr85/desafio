@@ -8,7 +8,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class EndPointTest extends TestCase
+class EndPointUserTest extends TestCase
 {
     /**
      * A basic feature testEndPointListUser.

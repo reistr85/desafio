@@ -72,6 +72,12 @@
 * 6.3 - Função: Responsável por excluir um determinado User do DB.
 * 6.4 - Retorno: User em JSON.
 
+### TESTS ###
+
+* Existem duas classes de tests usando o PHPUnit dentro da Laravel
+* Nos tests foram implementados para testar as chamadas dos endpoints da API RESTful.
+* Para realizar os tests no Endpoints rode o seguinte comando no seu terminal dentro da pasta raiz do projeto: vendor/bin/phpunit
+
 ### LICENSE ###
 
 [MIT](http://opensource.org/licenses/MIT)

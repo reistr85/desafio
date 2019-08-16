@@ -54285,9 +54285,9 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"], vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a, vue_the_mask__WEBPACK_IMPORTED_MODULE_3___default.a); //Vue.prototype.$BASE_URL = 'http://desafio.test/api/';
+Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"], vue_axios__WEBPACK_IMPORTED_MODULE_2___default.a, axios__WEBPACK_IMPORTED_MODULE_1___default.a, vue_the_mask__WEBPACK_IMPORTED_MODULE_3___default.a);
+Vue.prototype.$BASE_URL = 'http://desafio.test/api/'; //Vue.prototype.$BASE_URL = 'https://aw-desafio.herokuapp.com/api/';
 
-Vue.prototype.$BASE_URL = 'https://aw-desafio.herokuapp.com/api/';
 var routes = [{
   path: '/',
   name: 'home',
